@@ -8,13 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Showroom.unity
     guid: 153cd73c5fa33ba49a935c8920cabf0e
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Showroom_Lighting_Theme_PhotoStudio.unity
     guid: fe0a3112c0d6e68439af4fdf75141a6f
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   m_configObjects: {}
