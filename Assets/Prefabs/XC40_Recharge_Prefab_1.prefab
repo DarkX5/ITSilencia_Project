@@ -193,7 +193,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 085042a6d4f43004c83229132df9a364, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toggledGameObject: {fileID: 4385115557398492375}
+  toggledGameObjects:
+  - {fileID: 3880105954078285873}
+  - {fileID: 7534918959672812183}
+  - {fileID: 8554303065052247746}
+  - {fileID: 4897120878542008212}
+  - {fileID: 7455318472403556557}
   zoomLevelToggle: 3
 --- !u!65 &7834381873170828782
 BoxCollider:
@@ -1336,7 +1341,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1576226554154625250
 Transform:
   m_ObjectHideFlags: 0
@@ -1761,7 +1766,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &894145863623484266
 Transform:
   m_ObjectHideFlags: 0
@@ -1800,7 +1805,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3695947999293392553
 Transform:
   m_ObjectHideFlags: 0
@@ -2704,8 +2709,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: c9f9b2bc4b747f24791358f515793d93, type: 2}
   - {fileID: 2100000, guid: d8baf12f6f29df049ab0a9177b3e723f, type: 2}
   reflectionProbes:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 190351395841276030}
+  - {fileID: 2775679690486947308}
 --- !u!114 &3599719361590497457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3923,7 +3928,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8920334708245757874
 Transform:
   m_ObjectHideFlags: 0
@@ -4350,7 +4355,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3019361458185918664
 Transform:
   m_ObjectHideFlags: 0
@@ -4803,7 +4808,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &765635109187651162
 Transform:
   m_ObjectHideFlags: 0

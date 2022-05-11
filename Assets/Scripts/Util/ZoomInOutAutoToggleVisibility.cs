@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ZoomInOutAutoToggleVisibility : MonoBehaviour
 {
-    [SerializeField] private GameObject toggledGameObject = null;
+    [SerializeField] private GameObject[] toggledGameObjects = null;
     [SerializeField] private float zoomLevelToggle = 3f;
 
     // Start is called before the first frame update
@@ -20,9 +20,15 @@ public class ZoomInOutAutoToggleVisibility : MonoBehaviour
 
     private void ToggleObjectVisibility(float zoomLevel) {
         if (zoomLevel < zoomLevelToggle) {
-            toggledGameObject.SetActive(true);
+            ToggleObjects(true);
         } else {
-            toggledGameObject.SetActive(false);
+            ToggleObjects(false);
+        }
+    }
+
+    private void ToggleObjects(bool newActiveValue) {
+        for (int i = 0; i < toggledGameObjects.Length; i += 1) {
+            toggledGameObjects[i].SetActive(newActiveValue);
         }
     }
 }

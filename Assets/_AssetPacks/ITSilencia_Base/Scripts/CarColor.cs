@@ -121,10 +121,11 @@ public class CarColor : MonoBehaviour {
 
     private void UpdateReflectionProbes()
     {
+        if (reflectionProbes == null) { return; }
         foreach (ReflectionProbe refProbe in reflectionProbes)
         {
-            refProbe.gameObject.SetActive(false);
-            refProbe.gameObject.SetActive(true);
+            refProbe?.gameObject.SetActive(false);
+            refProbe?.gameObject.SetActive(true);
         }
     }
 

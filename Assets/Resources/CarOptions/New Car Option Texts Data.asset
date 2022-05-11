@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3131ca3178465e84e88c94f75158a74b, type: 3}
+  m_Name: New Car Option Texts Data
+  m_EditorClassIdentifier: 
+  language: en
+  driveOptionTexts:
+  - carDriveOption: 0
+    text: T3 Manual (160 KM)
+  - carDriveOption: 1
+    text: T3 Automatic (160 KM)
+  - carDriveOption: 2
+    text: B4 Mild Hybrid (190 KM)
+  - carDriveOption: 3
+    text: B4 AWD Mild Hybrid (190 KM)
+  - carDriveOption: 4
+    text: B4 AWD Mild Hybrid (250 KM)
+  colorOptionTexts:
+  - carColorOption: 0
+    text: Black Stone
+  - carColorOption: 3
+    text: Denim Blue
+  - carColorOption: 4
+    text: Fusion Red
+  - carColorOption: 2
+    text: Glacier Silver
+  - carColorOption: 1
+    text: Ice White
+  - carColorOption: 5
+    text: Its Green
+  upholsteryOptionTexts:
+  - carUpholsteryOption: 0
+    text: Black
+  - carUpholsteryOption: 1
+    text: White
+  packageOptionTexts:
+  - carPackagesOption: 3
+    text: Lighting
+  - carPackagesOption: 1
+    text: Parking
+  - carPackagesOption: 2
+    text: Technology
+  - carPackagesOption: 0
+    text: Winter

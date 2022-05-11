@@ -9,6 +9,7 @@ public class CarData : ScriptableObject
     [SerializeField] private string carName = "";
     [TextArea]
     [SerializeField] private string carDescription = "";
+    [Header("Option Lists")]
     [SerializeField] private CarDriveOption[] availableDriveOptionsList;
     [SerializeField] private CarDriveOption[] extraDriveOptionsList;
     [SerializeField] private CarColorOption[] availableColorsList;
