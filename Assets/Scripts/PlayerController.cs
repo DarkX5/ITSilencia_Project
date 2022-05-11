@@ -7,6 +7,8 @@ using UnityEngine.AI;
 public class PlayerController : MonoBehaviour
 {
     public static PlayerController Instance { get; private set; }
+    public static event Action<float> onZoomIn;
+    public static event Action<float> onZoomOut;
 
     // [Header("Data")]
     // [SerializeField] private GameMenu gm = null;
@@ -15,7 +17,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement Variables")]
     [SerializeField] private bool DisableMovement = false;
     [SerializeField] [Range(0.001f, 1000f)] private float movementSpeed = 10f;
-    [SerializeField] [Range(0,100)] private float sprintMultiplyer = 3f;
+    // [SerializeField] [Range(0,100)] private float sprintMultiplyer = 3f;
     [SerializeField] public bool invertMovementY = true;
 
 
@@ -56,11 +58,12 @@ public class PlayerController : MonoBehaviour
     private Vector2 viewJoystick = new Vector2(0,0);
     private float hAxis = 0f;
     private float vAxis = 0f;
-    private bool toggleSprint = false;
+    // private bool toggleSprint = false;
     private float mouseXAxis;
     private float mouseYAxis;
     private Vector2 mouseScrollDelta;
-    private bool mouseLeft, mouseLeftUpdated, mouseRight, mouseRightUpdated, mouseMid, mouseMidUpdated, mouseHitBool, centerScreenHitBool;
+    private bool mouseLeft, mouseLeftUpdated, mouseRight, mouseRightUpdated, mouseMid, mouseMidUpdated, mouseHitBool;
+    // bool centerScreenHitBool;
     private RaycastHit mouseRayHit;
     private RaycastHit centerScreenRayHit;
 
@@ -91,6 +94,8 @@ public class PlayerController : MonoBehaviour
  
         // if(followCamera == null)
         //     followCamera = Camera.main;
+        
+        onZoomIn?.Invoke(distance);
     }
 
     // Update is called once per frame
@@ -149,15 +154,15 @@ public class PlayerController : MonoBehaviour
             mouseRayHit = hit;
         }
 
-        ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
-        if(Physics.Raycast(ray, out RaycastHit screenHit,  Mathf.Infinity)) {
-        //if(Physics.Raycast(ray, out RaycastHit screenHit,  Mathf.Infinity, floorMask)) {
-            centerScreenHitBool = true;
-            centerScreenRayHit = screenHit;
-        } else {
-            centerScreenHitBool = false;
-            centerScreenRayHit = screenHit;
-        }
+        // ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
+        // if(Physics.Raycast(ray, out RaycastHit screenHit,  Mathf.Infinity)) {
+        // //if(Physics.Raycast(ray, out RaycastHit screenHit,  Mathf.Infinity, floorMask)) {
+        //     centerScreenHitBool = true;
+        //     centerScreenRayHit = screenHit;
+        // } else {
+        //     centerScreenHitBool = false;
+        //     centerScreenRayHit = screenHit;
+        // }
     }
 
     public float GetMaxValue(float value, float maximumValue) {
@@ -232,7 +237,7 @@ public class PlayerController : MonoBehaviour
     private void ProcessMovement()
     {
         ProcessMovementAnimations();
-        // followTarget.Translate(InvertY * hAxis * movementSpeed * Time.deltaTime, 0f, vAxis * movementSpeed * Time.deltaTime);
+        followTarget.Translate(InvertY * hAxis * movementSpeed * Time.deltaTime, 0f, vAxis * movementSpeed * Time.deltaTime);
     }
     private void ProcessOtherKeys()
     {
@@ -305,12 +310,16 @@ public class PlayerController : MonoBehaviour
         // Debug.Log($"mX: {mX} | mY: {mY}");
     }
 
-    private void ZoomIn()
+    // called from UI
+    public void ZoomIn()
     {
         if(mainCamera.orthographic) {
             mainCamera.orthographicSize -= zoomStep * 0.25f;
-            if (mainCamera.orthographicSize < 0.1f)
+            if (mainCamera.orthographicSize < 0.1f) {
                 mainCamera.orthographicSize = 0.1f;
+            }
+
+            onZoomIn?.Invoke(mainCamera.orthographicSize);
         } else {
             if (distance == minDistance)
                 return;
@@ -320,14 +329,20 @@ public class PlayerController : MonoBehaviour
                 return;
             }
             distance -= zoomStep;
+
+            onZoomIn?.Invoke(distance);
         }
     }
-    private void ZoomOut()
+    // called from UI
+    public void ZoomOut()
     {
         if(mainCamera.orthographic) {
             mainCamera.orthographicSize += zoomStep * 0.25f;
-            if (mainCamera.orthographicSize > 100f)
+            if (mainCamera.orthographicSize > 100f) {
                 mainCamera.orthographicSize = 100f;
+            }
+
+            onZoomOut?.Invoke(distance);
         } 
         else {
             if (distance == maxDistance)
@@ -338,6 +353,8 @@ public class PlayerController : MonoBehaviour
                 return;
             }
             distance += zoomStep;
+
+            onZoomOut?.Invoke(distance);
         }
     }
 

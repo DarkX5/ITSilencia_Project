@@ -11,7 +11,14 @@ public class CarColor : MonoBehaviour {
 
     private int currentColourIndex = 0;
 
-
+    private void Start() {
+        CarControls.onNextColor += SetNextColor;
+        CarControls.onPreviousColor += SetPreviousColor;
+    }
+    private void OnDestroy() {
+        CarControls.onNextColor -= SetNextColor;
+        CarControls.onPreviousColor -= SetPreviousColor;
+    }
 
     public void SetColourByIndex(int index) {
         if (mColourSet.Count == 0) {
@@ -37,9 +44,41 @@ public class CarColor : MonoBehaviour {
         {
             currentColourIndex++;
         }
-        else if (currentColourIndex == mColourSet.Count - 1)
+        else // if (currentColourIndex == mColourSet.Count - 1)
         {
             currentColourIndex = 0;
+        }
+
+        SetPartMaterial(mColourSet[currentColourIndex]);
+    }
+    public void SetNextColor()
+    {
+        if (mColourSet.Count == 0)
+            return;
+
+        if (currentColourIndex < mColourSet.Count - 1)
+        {
+            currentColourIndex++;
+        }
+        else // if (currentColourIndex == mColourSet.Count - 1)
+        {
+            currentColourIndex = 0;
+        }
+
+        SetPartMaterial(mColourSet[currentColourIndex]);
+    }
+    public void SetPreviousColor()
+    {
+        if (mColourSet.Count == 0)
+            return;
+
+        if (currentColourIndex > 0)
+        {
+            currentColourIndex--;
+        }
+        else
+        {
+            currentColourIndex = mColourSet.Count - 1;
         }
 
         SetPartMaterial(mColourSet[currentColourIndex]);

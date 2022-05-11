@@ -78,11 +78,11 @@ public class Doors
 
 public class CarDoor : MonoBehaviour
 {
+    [SerializeField] private float doorMaxOpenAngle = 42f;
     [Range(0.25f, 120f)]
     public float DoorSpeed = 45f;
 
     public List<Doors> DoorList = new List<Doors>();
-
 
     void Start()
     {
@@ -90,9 +90,27 @@ public class CarDoor : MonoBehaviour
         {
             DoorList[i].InitOriginalValues();
         }
+
+        CarControls.onOpenDoorsCmd += OpenDoors;
+        CarControls.onCloseDoorsCmd += CloseDoors;
+    }
+    private void OnDestroy() {
+        CarControls.onOpenDoorsCmd -= OpenDoors;
+        CarControls.onCloseDoorsCmd -= CloseDoors;
     }
 
-
+    public void OpenDoors() {
+        for(int i = 0; i < DoorList.Count; i += 1) {
+            DoorList[i].DoorState = DoorState.Opening;
+        }
+    }
+    public void CloseDoors()
+    {
+        for (int i = 0; i < DoorList.Count; i += 1)
+        {
+            DoorList[i].DoorState = DoorState.Closing;
+        }
+    }
     public void ToggleDoorControl(int doorIndex)
     {
         if (doorIndex < DoorList.Count && doorIndex >= 0)

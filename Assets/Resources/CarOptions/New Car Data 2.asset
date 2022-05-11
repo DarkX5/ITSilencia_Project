@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10303ee5f794a5a4d94d6e0bb6f41eac, type: 3}
+  m_Name: New Car Data 2
+  m_EditorClassIdentifier: 
+  carPrefab: {fileID: 5093724472117434599, guid: 67d572fd827b15a408f971b09f985065,
+    type: 3}
+  carName: Inscription
+  carDescription: The most sophisticated XC40 model. Chrome exterior details, unique
+    wheels and exclusive leather seats create absolute Scandinavian luxury.
+  availableDriveOptionsList: 01000000020000000300000004000000
+  extraDriveOptionsList: 
+  availableColorsList: 0000000001000000
+  extraColorOptionsList: 020000000300000004000000
+  availableCarUpholsteryOptionsList: 0000000001000000
+  extraCarUpholsteryOptionsList: 
+  availableCarPackageOptionsList: 
+  extraCarPackageOptionsList: 00000000010000000200000003000000

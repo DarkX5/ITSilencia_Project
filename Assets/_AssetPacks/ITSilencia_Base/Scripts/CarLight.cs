@@ -25,8 +25,14 @@ public class CarLight : MonoBehaviour
 
         SetLightComponents();
         SetMaterialsForLight();
-    }
 
+        CarControls.onLightsTurnOn += TurnLightsOn;
+        CarControls.onLightsTurnOff += TurnLightsOff;
+    }
+    private void OnDestroy() {
+        CarControls.onLightsTurnOn -= TurnLightsOn;
+        CarControls.onLightsTurnOff -= TurnLightsOff;
+    }
 
     public void RefreshObjects()
     {
@@ -95,6 +101,20 @@ public class CarLight : MonoBehaviour
         SetLightComponents();
         SetMaterialsForLight();
 
+    }
+
+    private void TurnLightsOn() {
+        lightOn = true;
+
+        SetLightComponents();
+        SetMaterialsForLight();
+    }
+    private void TurnLightsOff()
+    {
+        lightOn = false;
+
+        SetLightComponents();
+        SetMaterialsForLight();
     }
 
 }
