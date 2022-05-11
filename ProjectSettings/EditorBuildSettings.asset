@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Showroom.unity
+    path: Assets/_AssetPacks/ITSilencia_Base/Scenes/Showroom.unity
     guid: 153cd73c5fa33ba49a935c8920cabf0e
   - enabled: 1
-    path: Assets/Scenes/Showroom_Lighting_Theme_PhotoStudio.unity
+    path: Assets/_AssetPacks/ITSilencia_Base/Scenes/Showroom_Lighting_Theme_PhotoStudio.unity
     guid: fe0a3112c0d6e68439af4fdf75141a6f
   m_configObjects: {}
