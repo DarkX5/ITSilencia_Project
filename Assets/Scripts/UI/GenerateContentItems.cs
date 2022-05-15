@@ -5,8 +5,26 @@ using UnityEngine.UI;
 public class GenerateContentItems : MonoBehaviour
 {
     [SerializeField] protected Dropdown managedDropdown = null;
+    
+    // Start is called before the first frame update
+    void Start()
+    {
+        if (managedDropdown == null)
+        {
+            managedDropdown = GetComponentInChildren<Dropdown>();
+        }
+
+        // DataLoader.onDataLoaded += LoadDataTextsForContentItems;
+        ConfigurationDescriptionHandler.onNewConfigurationSet += LoadDataTextsForContentItemsAfterConfig;
+    }
+    private void OnDestroy()
+    {
+        // DataLoader.onDataLoaded -= LoadDataTextsForContentItems;
+        ConfigurationDescriptionHandler.onNewConfigurationSet -= LoadDataTextsForContentItemsAfterConfig;
+    }
 
     protected virtual void LoadDataTextsForContentItems() { }
+    protected virtual void LoadDataTextsForContentItemsAfterConfig(int configurationIdx) { }
 
     protected void GenerateDropdownContent(OptionText[] dropdownContentTexts)
     {

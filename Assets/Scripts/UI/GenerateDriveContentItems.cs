@@ -1,30 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿// using System.Collections;
+// using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+// using UnityEngine.UI;
 
 public class GenerateDriveContentItems : GenerateContentItems
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        if (managedDropdown == null)
-        {
-            managedDropdown = GetComponentInChildren<Dropdown>();
-        }
+    // // Start is called before the first frame update
+    // void Start()
+    // {
+    //     if (managedDropdown == null)
+    //     {
+    //         managedDropdown = GetComponentInChildren<Dropdown>();
+    //     }
 
-        DataLoader.onDataLoaded += LoadDataTextsForContentItems;
-    }
-    private void OnDestroy()
-    {
-        DataLoader.onDataLoaded -= LoadDataTextsForContentItems;
-    }
+    //     DataLoader.onDataLoaded += LoadDataTextsForContentItems;
+    // }
+    // private void OnDestroy()
+    // {
+    //     DataLoader.onDataLoaded -= LoadDataTextsForContentItems;
+    // }
 
     protected override void LoadDataTextsForContentItems()
     {
-        Debug.Log(DataLoader.Instance.CarDriveOptionsTexts[0].text);
         // get texts for options
         GenerateDropdownContent(DataLoader.Instance.CarDriveOptionsTexts);
+    }
+    protected override void LoadDataTextsForContentItemsAfterConfig(int configurationIdx) {
+        LoadDataTextsForContentItems();
     }
 
     // [SerializeField] private Dropdown optionDropdown = null;
@@ -40,7 +42,7 @@ public class GenerateDriveContentItems : GenerateContentItems
     // private void OnDestroy() {
     //     DataLoader.onDataLoaded -= GenerateContentItems;
     // }
-    
+
     // private void GenerateContentItems() {
     //     // get texts for options
     //     var driveOptionTexts = DataLoader.Instance.CarDriveOptionsTexts;

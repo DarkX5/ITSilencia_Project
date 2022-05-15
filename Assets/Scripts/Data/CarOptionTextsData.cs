@@ -42,6 +42,10 @@ public class CarOptionTextsData : ScriptableObject {
 // define Option Text 
 public class OptionText
 {
+    public OptionText() {}
+    public OptionText(string newText) {
+        text = newText;
+    }
     public string text;
 }
 

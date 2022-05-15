@@ -1,29 +1,33 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿// using System.Collections;
+// using System.Collections.Generic;
+// using UnityEngine;
+// using UnityEngine.UI;
 
 public class GeneratePackageContentItems : GenerateContentItems
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        if (managedDropdown == null)
-        {
-            managedDropdown = GetComponentInChildren<Dropdown>();
-        }
+    // // Start is called before the first frame update
+    // void Start()
+    // {
+    //     if (managedDropdown == null)
+    //     {
+    //         managedDropdown = GetComponentInChildren<Dropdown>();
+    //     }
 
-        DataLoader.onDataLoaded += LoadDataTextsForContentItems;
-    }
-    private void OnDestroy()
-    {
-        DataLoader.onDataLoaded -= LoadDataTextsForContentItems;
-    }
+    //     DataLoader.onDataLoaded += LoadDataTextsForContentItems;
+    // }
+    // private void OnDestroy()
+    // {
+    //     DataLoader.onDataLoaded -= LoadDataTextsForContentItems;
+    // }
 
     protected override void LoadDataTextsForContentItems()
     {
         // get texts for options
         GenerateDropdownContent(DataLoader.Instance.CarPackageOptionsTexts);
+    }
+    protected override void LoadDataTextsForContentItemsAfterConfig(int configurationIdx)
+    {
+        LoadDataTextsForContentItems();
     }
 
     // [SerializeField] private Dropdown optionDropdown = null;

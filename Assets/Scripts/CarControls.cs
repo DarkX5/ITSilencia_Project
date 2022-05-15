@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,13 +17,15 @@ public class CarControls : MonoBehaviour
     public static event Action<int> onSetUpholstery;
     public static event Action<int> onSetPackage;
 #endregion
-    [SerializeField] private float initDelay = 0.25f;
+    [SerializeField] private float initDelay = 0.75f;
+    [SerializeField] private CarColor carColorControl = null;
 
     private void Start() {
         Invoke("InitColor", initDelay);
     }
 
     private void InitColor() {
+        carColorControl = FindObjectOfType<CarColor>();
         SetColorByIdx(1);
         SetColorByIdx(0);
     }
@@ -52,12 +52,12 @@ public class CarControls : MonoBehaviour
     // called from UI
     public void SetNextColor()
     {
-        onNextColor?.Invoke();
+        // onNextColor?.Invoke();
     }
     // called from UI
     public void SetPreviousColor()
     {
-        onPreviousColor?.Invoke();
+        // onPreviousColor?.Invoke();
     }
     // called from UI 
     public void SetDrive(Dropdown valuesDropdown) {
@@ -66,7 +66,8 @@ public class CarControls : MonoBehaviour
     // called from UI 
     public void SetColor(Dropdown valuesDropdown)
     {
-        onSetColor?.Invoke(valuesDropdown.value);
+        SetColorByIdx(valuesDropdown.value);
+        // onSetColor?.Invoke(valuesDropdown.value);
     }
     // called from UI 
     public void SetUpholstery(Dropdown valuesDropdown)
@@ -79,9 +80,21 @@ public class CarControls : MonoBehaviour
         onSetPackage?.Invoke(valuesDropdown.value);
     }
 
-
     public void SetColorByIdx(int idx)
     {
-        onSetColor?.Invoke(idx);
+        ColorOptionText[] allColorTexts = DataLoader.Instance.ConfigurationOptionTexts.ColorOptionsTexts;
+        CarColorOption colorOption;
+        if (idx >= DataLoader.Instance.CurrentCarData.AvailableColorOptionsList.Length) {
+            idx -= DataLoader.Instance.CurrentCarData.AvailableColorOptionsList.Length;
+            colorOption = DataLoader.Instance.CurrentCarData.ExtraColorOptionsList[idx];
+        } else {
+            colorOption = DataLoader.Instance.CurrentCarData.AvailableColorOptionsList[idx];
+        }
+
+        for(int i = 0; i < allColorTexts.Length; i += 1) {
+            if (colorOption == allColorTexts[i].carColorOption) {
+                carColorControl?.SetColourByIndex(i);
+            }
+        }
     }
 }

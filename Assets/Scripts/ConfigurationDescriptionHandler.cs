@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ConfigurationDescriptionUIHandler : MonoBehaviour
+public class ConfigurationDescriptionHandler : MonoBehaviour
 {
-    public event Action onNextConfiguration;
-    public event Action onPreviousConfiguration;
+    public static event Action<int> onNewConfigurationSet;
 
     [SerializeField] private Text configurationTitleText = null;
     [SerializeField] private Text configurationDescriptionText = null;
@@ -31,6 +30,8 @@ public class ConfigurationDescriptionUIHandler : MonoBehaviour
     private void LoadConfig(int idx) {
         configurationTitleText.text = carData[currentConfigIdx].ConfigurationName;
         configurationDescriptionText.text = carData[currentConfigIdx].ConfigurationDescription;
+
+        onNewConfigurationSet?.Invoke(idx);
     }
 
     public void NextConfiguration() {

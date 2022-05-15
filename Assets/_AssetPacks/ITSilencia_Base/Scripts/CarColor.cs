@@ -11,17 +11,6 @@ public class CarColor : MonoBehaviour {
 
     private int currentColourIndex = 0;
 
-    private void Start() {
-        CarControls.onNextColor += SetNextColor;
-        CarControls.onPreviousColor += SetPreviousColor;
-        CarControls.onSetColor += SetColourByIndex;
-    }
-    private void OnDestroy() {
-        CarControls.onNextColor -= SetNextColor;
-        CarControls.onPreviousColor -= SetPreviousColor;
-        CarControls.onSetColor -= SetColourByIndex;
-    }
-
     public void SetColourByIndex(int index) {
         if (mColourSet.Count == 0) {
             Debug.LogWarning("Empty body Colour sets.");

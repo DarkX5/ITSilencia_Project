@@ -21,4 +21,12 @@ public class CarData : ScriptableObject
 
     public string ConfigurationName { get { return configurationName; } }
     public string ConfigurationDescription { get { return configurationDescription; } }
+    public CarDriveOption[] AvailableDriveOptionsList { get { return availableDriveOptionsList; } }
+    public CarDriveOption[] ExtraDriveOptionsList { get { return extraDriveOptionsList; } }
+    public CarColorOption[] AvailableColorOptionsList { get { return availableColorsList; } }
+    public CarColorOption[] ExtraColorOptionsList { get { return extraColorOptionsList; } }
+    public CarUpholsteryOption[] AvailableCarUpholsteryOptionsList { get { return availableCarUpholsteryOptionsList; } }
+    public CarUpholsteryOption[] ExtraCarUpholsteryOptionsList { get { return extraCarUpholsteryOptionsList; } }
+    public CarPackagesOption[] AvailableCarPackageOptionsList { get { return availableCarPackageOptionsList; } }
+    public CarPackagesOption[] ExtraCarPackageOptionsList { get { return extraCarPackageOptionsList; } }
 }
