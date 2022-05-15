@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPrefab: {fileID: 5093724472117434599, guid: 67d572fd827b15a408f971b09f985065,
     type: 3}
-  carName: R-Design
-  carDescription: Built for active driving. With gloss black details, unique wheels
-    and a stylishly finished interior.
+  configurationName: R-Design
+  configurationDescription: Built for active driving. With gloss black details, unique
+    wheels and a stylishly finished interior.
   availableDriveOptionsList: 01000000020000000300000004000000
   extraDriveOptionsList: 
   availableColorsList: 0000000001000000

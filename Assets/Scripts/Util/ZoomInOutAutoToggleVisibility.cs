@@ -19,6 +19,10 @@ public class ZoomInOutAutoToggleVisibility : MonoBehaviour
     }
 
     private void ToggleObjectVisibility(float zoomLevel) {
+        // if hovering UI -> don't zoom
+        if (PlayerController.Instance.isMouseOverUI) { return; }
+        
+        // not hovering UI -> zoom away
         if (zoomLevel < zoomLevelToggle) {
             ToggleObjects(true);
         } else {

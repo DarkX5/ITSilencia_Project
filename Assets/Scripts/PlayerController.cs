@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     // [Header("Data")]
     // [SerializeField] private GameMenu gm = null;
     [SerializeField] private GameObject helpInfoText = null;
+    [SerializeField] private Camera mainCamera;
 
     [Header("Movement Variables")]
     [SerializeField] private bool DisableMovement = false;
@@ -53,7 +54,6 @@ public class PlayerController : MonoBehaviour
 
     private bool mouseOverUI = false;
 
-    private Camera mainCamera;
     private Vector2 moveJoystick = new Vector2(0,0);
     private Vector2 viewJoystick = new Vector2(0,0);
     private float hAxis = 0f;
@@ -78,6 +78,8 @@ public class PlayerController : MonoBehaviour
         set { invertMovementY = value > 0 ? true : false; }
     }
 
+    public bool isMouseOverUI { get { return mouseOverUI; } }
+
     public void SetOverUIBool(bool newValue)
     {
         mouseOverUI = newValue;
@@ -85,15 +87,10 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        mainCamera = Camera.main;
+        if (mainCamera == null) { 
+            mainCamera = Camera.main;
+        }
         animator = gameObject.GetComponent<AnimationControllerScript>();
-        // agent = gameObject.GetComponent<NavMeshAgent>();
-        // agent.enabled = false;
-        // agent.enabled = true;
-        // agent.Warp(transform.position);
- 
-        // if(followCamera == null)
-        //     followCamera = Camera.main;
         
         onZoomIn?.Invoke(distance);
     }
@@ -245,6 +242,10 @@ public class PlayerController : MonoBehaviour
     }
     private void ProcessZoom(Vector2 inputMouseScrollDelta)
     {
+        // if hovering UI -> don't zoom
+        if (mouseOverUI) { return; }
+
+        // not hovering UI -> zoom away
         if (inputMouseScrollDelta == Vector2.up)
             if (invertScrollZoom) ZoomOut();
             else ZoomIn();
@@ -255,7 +256,7 @@ public class PlayerController : MonoBehaviour
     void OrbitPlayer()
     {
         float mX, mY, sen;
-        NewMethod(out mX, out mY, out sen);
+        SetupOrbitVariables(out mX, out mY, out sen);
         if (enableRotation || enableJoystickRotation)
         {
             mouseXRot += (invertLookX ? -1 : 1) * mY * sen * Time.deltaTime;
@@ -293,21 +294,12 @@ public class PlayerController : MonoBehaviour
                                                                   followTarget.transform.localEulerAngles.z);
     }
 
-    private void NewMethod(out float mX, out float mY, out float sen)
+    private void SetupOrbitVariables(out float mX, out float mY, out float sen)
     {
-
-        // if(viewJoystickHandle != null && viewJoystickHandle.GetComponent<FloatingJoystick>().ViewHeld) {
-        //     mX = viewJoystick.normalized.x;
-        //     mY = viewJoystick.normalized.y;
-        //     sen = joystickSensitivity;
-        //     enableJoystickRotation = true;
-        // } else {
         mX = mouseXAxis;
         mY = mouseYAxis;
         sen = keyboardSensitivity;
         enableJoystickRotation = false;
-        // }
-        // Debug.Log($"mX: {mX} | mY: {mY}");
     }
 
     // called from UI

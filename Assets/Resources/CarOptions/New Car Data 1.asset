@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carPrefab: {fileID: 5093724472117434599, guid: 67d572fd827b15a408f971b09f985065,
     type: 3}
-  carName: Momentum
-  carDescription: 'Comfort that is the hallmark of an inspiring urban SUV. Contrasting
-    exterior details and interior with premium textile upholstery. '
+  configurationName: Momentum
+  configurationDescription: Comfort that is the hallmark of an inspiring urban SUV.
+    Contrasting exterior details and interior with premium textile upholstery.
   availableDriveOptionsList: 0000000001000000
   extraDriveOptionsList: 
   availableColorsList: 0000000001000000

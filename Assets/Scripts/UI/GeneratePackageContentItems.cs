@@ -3,32 +3,53 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GeneratePackageContentItems : MonoBehaviour
+public class GeneratePackageContentItems : GenerateContentItems
 {
-    [SerializeField] private Dropdown optionDropdown = null;
-
     // Start is called before the first frame update
     void Start()
     {
-        if (optionDropdown == null) {
-            optionDropdown = GetComponentInChildren<Dropdown>();
+        if (managedDropdown == null)
+        {
+            managedDropdown = GetComponentInChildren<Dropdown>();
         }
-        DataLoader.onDataLoaded += GenerateContentItems;
+
+        DataLoader.onDataLoaded += LoadDataTextsForContentItems;
     }
-    private void OnDestroy() {
-        DataLoader.onDataLoaded -= GenerateContentItems;
+    private void OnDestroy()
+    {
+        DataLoader.onDataLoaded -= LoadDataTextsForContentItems;
     }
-    
-    private void GenerateContentItems() {
+
+    protected override void LoadDataTextsForContentItems()
+    {
         // get texts for options
-        var driveOptionTexts = DataLoader.Instance.CarPackageOptionsTexts;
-
-        List<Dropdown.OptionData>  driveDropdownOptions = new List<Dropdown.OptionData>();
-        for (int i = 0; i < driveOptionTexts.Length; i += 1) {
-            driveDropdownOptions.Add(new Dropdown.OptionData(driveOptionTexts[i].text));
-        }
-
-        optionDropdown.ClearOptions();
-        optionDropdown.AddOptions(driveDropdownOptions);
+        GenerateDropdownContent(DataLoader.Instance.CarPackageOptionsTexts);
     }
+
+    // [SerializeField] private Dropdown optionDropdown = null;
+
+    // // Start is called before the first frame update
+    // void Start()
+    // {
+    //     if (optionDropdown == null) {
+    //         optionDropdown = GetComponentInChildren<Dropdown>();
+    //     }
+    //     DataLoader.onDataLoaded += GenerateContentItems;
+    // }
+    // private void OnDestroy() {
+    //     DataLoader.onDataLoaded -= GenerateContentItems;
+    // }
+    
+    // private void GenerateContentItems() {
+    //     // get texts for options
+    //     var driveOptionTexts = DataLoader.Instance.CarPackageOptionsTexts;
+
+    //     List<Dropdown.OptionData>  driveDropdownOptions = new List<Dropdown.OptionData>();
+    //     for (int i = 0; i < driveOptionTexts.Length; i += 1) {
+    //         driveDropdownOptions.Add(new Dropdown.OptionData(driveOptionTexts[i].text));
+    //     }
+
+    //     optionDropdown.ClearOptions();
+    //     optionDropdown.AddOptions(driveDropdownOptions);
+    // }
 }

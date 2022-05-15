@@ -6,9 +6,9 @@ using UnityEngine;
 public class CarData : ScriptableObject
 {
     [SerializeField] private GameObject carPrefab = null;
-    [SerializeField] private string carName = "";
+    [SerializeField] private string configurationName = "";
     [TextArea]
-    [SerializeField] private string carDescription = "";
+    [SerializeField] private string configurationDescription = "";
     [Header("Option Lists")]
     [SerializeField] private CarDriveOption[] availableDriveOptionsList;
     [SerializeField] private CarDriveOption[] extraDriveOptionsList;
@@ -18,4 +18,7 @@ public class CarData : ScriptableObject
     [SerializeField] private CarUpholsteryOption[] extraCarUpholsteryOptionsList;
     [SerializeField] private CarPackagesOption[] availableCarPackageOptionsList;
     [SerializeField] private CarPackagesOption[] extraCarPackageOptionsList;
+
+    public string ConfigurationName { get { return configurationName; } }
+    public string ConfigurationDescription { get { return configurationDescription; } }
 }

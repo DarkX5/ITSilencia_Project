@@ -1,34 +1,47 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GenerateColorContentItems : MonoBehaviour
+public class GenerateColorContentItems : GenerateContentItems
 {
-    [SerializeField] private Dropdown optionDropdown = null;
-
     // Start is called before the first frame update
     void Start()
     {
-        if (optionDropdown == null) {
-            optionDropdown = GetComponentInChildren<Dropdown>();
+        if (managedDropdown == null)
+        {
+            managedDropdown = GetComponentInChildren<Dropdown>();
         }
-        DataLoader.onDataLoaded += GenerateContentItems;
+
+        DataLoader.onDataLoaded += LoadDataTextsForContentItems;
     }
-    private void OnDestroy() {
-        DataLoader.onDataLoaded -= GenerateContentItems;
+    private void OnDestroy()
+    {
+        DataLoader.onDataLoaded -= LoadDataTextsForContentItems;
     }
     
-    private void GenerateContentItems() {
+    protected override void LoadDataTextsForContentItems() {
         // get texts for options
-        var driveOptionTexts = DataLoader.Instance.CarColorOptionsTexts;
-
-        List<Dropdown.OptionData>  driveDropdownOptions = new List<Dropdown.OptionData>();
-        for (int i = 0; i < driveOptionTexts.Length; i += 1) {
-            driveDropdownOptions.Add(new Dropdown.OptionData(driveOptionTexts[i].text));
-        }
-
-        optionDropdown.ClearOptions();
-        optionDropdown.AddOptions(driveDropdownOptions);
+        GenerateDropdownContent(DataLoader.Instance.CarColorOptionsTexts);
     }
+
+
+    // [SerializeField] private Dropdown optionDropdown = null;
+
+    // private void GenerateContentItems() {
+    //     // get texts for options
+    //     var optionTexts = DataLoader.Instance.CarColorOptionsTexts;
+
+    //     List<Dropdown.OptionData>  driveDropdownOptions = new List<Dropdown.OptionData>();
+    //     for (int i = 0; i < optionTexts.Length; i += 1) {
+    //         driveDropdownOptions.Add(new Dropdown.OptionData(optionTexts[i].text));
+    //     }
+
+    //     optionDropdown.ClearOptions();
+    //     optionDropdown.AddOptions(driveDropdownOptions);
+    // }
+
+    // // called from UI
+    // public void ChangeColor(Dropdown colorDropdown) {
+
+    // }
 }

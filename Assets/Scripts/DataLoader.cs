@@ -8,7 +8,9 @@ public class DataLoader : MonoBehaviour
     public static DataLoader Instance { get; private set;}
     public static event Action onDataLoaded;
     private CarData[] carData;
-    private CarOptionTextsData carOptionTexts;
+    [SerializeField] private CarOptionTextsData carOptionTexts;
+    [SerializeField] private float onDataLoadedCallDelay = 0.5f;
+
     private void Awake() {
         if (Instance != null) {
             Destroy(gameObject);
@@ -21,6 +23,7 @@ public class DataLoader : MonoBehaviour
     public ColorOptionText[] CarColorOptionsTexts { get { return carOptionTexts?.ColorOptionsTexts; } }
     public UpholsteryOptionText[] CarUpholsteryOptionsTexts { get { return carOptionTexts?.UpholsteryOptionsTexts; } }
     public PackagesOptionText[] CarPackageOptionsTexts { get { return carOptionTexts?.PackageOptionsTexts; } }
+    public CarData[] CarData { get { return carData; } }
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +34,13 @@ public class DataLoader : MonoBehaviour
         // get option texts
         carOptionTexts = Resources.LoadAll<CarOptionTextsData>("CarOptions")?[0];
         Debug.Log($"Data Loaded: {(carOptionTexts != null ? carOptionTexts.DriveOptionsTexts.Length.ToString() : "null")} entries found");
+
+        if (onDataLoaded != null) {
+            Invoke("OnDataLoaded", onDataLoadedCallDelay);
+        }
+    }
+
+    private void OnDataLoaded(){
         onDataLoaded?.Invoke();
     }
 }
