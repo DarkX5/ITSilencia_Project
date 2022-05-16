@@ -1,36 +1,26 @@
 ﻿
-// using UnityEngine;
-// using UnityEngine.UI;
+using System;
 
 public class GenerateColorContentItems : GenerateContentItems
 {
+    public static event Action<int> onColorChange = null;
     protected override void LoadDataTextsForContentItems() {
         // get texts for options
         GenerateDropdownContent(DataLoader.Instance.CarColorOptionsTexts);
+        LoadCurrentConfigValue();
     }
     protected override void LoadDataTextsForContentItemsAfterConfig(int configurationIdx)
     {
         LoadDataTextsForContentItems();
     }
-
-
-    // [SerializeField] private Dropdown optionDropdown = null;
-
-    // private void GenerateContentItems() {
-    //     // get texts for options
-    //     var optionTexts = DataLoader.Instance.CarColorOptionsTexts;
-
-    //     List<Dropdown.OptionData>  driveDropdownOptions = new List<Dropdown.OptionData>();
-    //     for (int i = 0; i < optionTexts.Length; i += 1) {
-    //         driveDropdownOptions.Add(new Dropdown.OptionData(optionTexts[i].text));
-    //     }
-
-    //     optionDropdown.ClearOptions();
-    //     optionDropdown.AddOptions(driveDropdownOptions);
-    // }
-
-    // // called from UI
-    // public void ChangeColor(Dropdown colorDropdown) {
-
-    // }
+    protected override void LoadCurrentConfigValue()
+    {
+        managedDropdown.value = DataLoader.Instance.CurrentConfiguration.colorOption;
+        onColorChange?.Invoke(managedDropdown.value);
+    }
+    // called from UI
+    public override void SetNewOption()
+    {
+        DataLoader.Instance.SetColorOption(managedDropdown.value);
+    }
 }

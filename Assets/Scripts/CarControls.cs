@@ -21,7 +21,11 @@ public class CarControls : MonoBehaviour
     [SerializeField] private CarColor carColorControl = null;
 
     private void Start() {
+        GenerateColorContentItems.onColorChange += SetColorByIdx;
         Invoke("InitColor", initDelay);
+    }
+    private void OnDestroy() {
+        GenerateColorContentItems.onColorChange -= SetColorByIdx;
     }
 
     private void InitColor() {

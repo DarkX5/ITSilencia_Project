@@ -28,6 +28,9 @@ public class ConfigurationDescriptionHandler : MonoBehaviour
         LoadConfig(0);
     }
     private void LoadConfig(int idx) {
+        if (carData != DataLoader.Instance.CarData) {
+            carData = DataLoader.Instance.CarData;
+        }
         configurationTitleText.text = carData[currentConfigIdx].ConfigurationName;
         configurationDescriptionText.text = carData[currentConfigIdx].ConfigurationDescription;
 
@@ -35,6 +38,7 @@ public class ConfigurationDescriptionHandler : MonoBehaviour
     }
 
     public void NextConfiguration() {
+        Debug.Log(currentConfigIdx);
         currentConfigIdx += 1;
         if (currentConfigIdx >= carData.Length) {
             currentConfigIdx = 0;
@@ -42,6 +46,7 @@ public class ConfigurationDescriptionHandler : MonoBehaviour
         LoadConfig(currentConfigIdx);
     }
     public void PreviousConfiguration() {
+        Debug.Log(currentConfigIdx);
         currentConfigIdx -= 1;
         if (currentConfigIdx < 0) {
             currentConfigIdx = carData.Length - 1;
